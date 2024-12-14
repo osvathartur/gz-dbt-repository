@@ -47,3 +47,37 @@ sources:
             description: cost of loging
           - name: ship_cost
             description: cost of shipping of the order
+models:
+  - name: int_sales_margin
+    description: calculates margin for each unique order / product pair
+    columns:
+      - name: orders_id
+        description: foreign key from orders
+      - name: product_id
+        description: foreign key from products
+      - name: date_date
+        description: date of order
+    tests:
+      - unique:
+          column_name: "(orders_id || '-' || products_id)"
+  - name: int_orders_margin
+    description: order level margin
+    columns:
+      - name: orders_id
+        description: primary key
+        tests:
+          - unique
+  - name: int_orders_operational
+    description: order level operational margin
+    columns:
+      - name: orders_id
+        description: primary key
+        tests:
+          - unique
+  - name: finance_days
+    description: daily finance metrics
+    columns:
+      - name: date_date
+        description: primary key
+        tests:
+          - unique
